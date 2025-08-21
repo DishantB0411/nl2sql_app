@@ -1,0 +1,7 @@
+id,question,expected_sql,notes
+1,Show all properties in London.,SELECT * FROM properties WHERE city = 'London',Simple SELECT/WHERE
+2,How many properties are currently available?,SELECT COUNT(*) FROM properties WHERE status = 'available',Aggregation (COUNT)
+3,What is the average price of a property in Bradford?,SELECT AVG(price) FROM properties WHERE city = 'Bradford',Aggregation (AVG) with a condition
+4,List the number of properties in each city.,"SELECT city, COUNT(property_id) FROM properties GROUP BY city",GROUP BY
+5,Show me the top 3 most expensive properties.,SELECT * FROM properties ORDER BY price DESC LIMIT 3,ORDER BY and LIMIT
+6,Find apartments with 2 bedrooms and 1 bathroom.,SELECT * FROM properties WHERE property_type = 'apartment' AND bedrooms = 2 AND bathrooms = 1,Multiple AND conditions
