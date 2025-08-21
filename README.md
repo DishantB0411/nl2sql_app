@@ -92,7 +92,7 @@ The `rental_app` database contains the core tables for the business. The schema 
 
 *(List your actual tables here. Example below)*
 
--   **`users` **
+-   **`users`**
 -   **`favorites`**
 -   **`bookings`**
 -   **`properties`** 
@@ -169,7 +169,7 @@ def get_database_connection():
 
 -   **To use SQL Server Authentication** (if not using a trusted Windows connection): You must provide a username and password.
     -   *Example*: `mssql+pyodbc://your_user:your_password@localhost\\SQLEXPRESS/rental_app?driver=...`
-
+For the time being use this connection URI else you can add your own connection uri and check the connection using `testing_connection.py` file.
 ### ### 6.4. Set Up API Key
 
 -   In the project root, create a file named `.env`.
