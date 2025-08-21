@@ -92,13 +92,13 @@ The `rental_app` database contains the core tables for the business. The schema 
 
 *(List your actual tables here. Example below)*
 
--   **`users` 
--   **`favorites`
--   **`bookings`
--   **`properties` 
--   **`property_photos`
--   **`reviews`
--   **`payments`
+-   **`users` **
+-   **`favorites`**
+-   **`bookings`**
+-   **`properties`** 
+-   **`property_photos`**
+-   **`reviews`**
+-   **`payments`**
 
 ***
 
