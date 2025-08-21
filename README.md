@@ -5,7 +5,7 @@
 [![LangChain](https://img.shields.io/badge/LangChain-0.1%2B-green.svg)](https://www.langchain.com/)
 [![Google Gemini](https://img.shields.io/badge/Google-Gemini-purple.svg)](https://ai.google.dev/)
 
-## ## 1. Project Abstract
+## 1. Project Abstract
 ![UI](https://github.com/DishantB0411/nl2sql_app/blob/main/screenshots/Screenshot%202025-08-21%20225127.png)
 This repository, `NL2SQL_APP`, contains the source code for the **Database Assistant**, an advanced conversational AI application. Its primary objective is to bridge the gap between complex business data and non-technical stakeholders (such as C-level executives) by providing a natural language interface for database querying.
 
@@ -15,7 +15,7 @@ This document provides a detailed breakdown of the project's methodology, archit
 
 ***
 
-## ## 2. Key Features
+## 2. Key Features
 
 The application is designed with a focus on usability, transparency, and robustness.
 
@@ -36,11 +36,11 @@ The application is designed with a focus on usability, transparency, and robustn
 
 ***
 
-## ## 3. Core Methodology and System Architecture
+## 3. Core Methodology and System Architecture
 
 The application operates on the **ReAct (Reason and Act)** framework, a powerful paradigm for creating autonomous agents. The agent iteratively reasons about a problem, chooses a tool (an "action"), observes the result, and repeats this loop until it arrives at a final answer.
 
-### ### Architectural Flow
+### Architectural Flow
 
 ```
 [User] -> [Streamlit Frontend] -> [Agent Executor] -> [LLM (Gemini)]
@@ -64,11 +64,11 @@ The application operates on the **ReAct (Reason and Act)** framework, a powerful
 
 ***
 
-## ## 4. Code Implementation: A Detailed Walkthrough
+## 4. Code Implementation: A Detailed Walkthrough
 
 The core logic is contained within `app.py`. Below is a breakdown of its key components.
 
-### ### 4.1. LLM and Agent Setup (`get_sql_agent`)
+### 4.1. LLM and Agent Setup (`get_sql_agent`)
 
 This function is the heart of the application's AI capabilities.
 -   **LLM Instantiation**: `ChatGoogleGenerativeAI` is initialized.
@@ -76,7 +76,7 @@ This function is the heart of the application's AI capabilities.
 -   **Critical Prompt Engineering**: A specific `system_prompt` is used to strictly define the agent's role, forcing it to rely only on its tools and to decline any out-of-scope questions. This was a key step to tame the generalist nature of the Gemini model.
 -   **Agent Executor**: `AgentExecutor` is the runtime that manages the entire Reason-Act loop, with `return_intermediate_steps=True` being essential for extracting the generated SQL query for display.
 
-### ### 4.2. Streamlit UI and Chat Logic
+### 4.2. Streamlit UI and Chat Logic
 
 -   **Sidebar for Database Info**: The code explicitly gets the table names from the `db` object and iterates through them, using `db._inspector.get_columns(table)` to fetch and display the schema for each table in the sidebar.
 -   ![sidebar](https://github.com/DishantB0411/nl2sql_app/blob/main/screenshots/Screenshot%202025-08-21%20225047.png)
@@ -84,7 +84,7 @@ This function is the heart of the application's AI capabilities.
 
 ***
 
-## ## 5. Database Schema
+## 5. Database Schema
 
 The `rental_app` database contains the core tables for the business. The schema is defined in `db/setup.sql`.
 
@@ -102,11 +102,11 @@ The `rental_app` database contains the core tables for the business. The schema 
 
 ***
 
-## ## 6. Setup and Installation Guide
+## 6. Setup and Installation Guide
 
 Follow these steps to set up and run the project on your local machine.
 
-### ### 6.1. Prerequisites and Recommended Tooling
+### 6.1. Prerequisites and Recommended Tooling
 
 -   **Prerequisites**:
     -   [Python 3.9+](https://www.python.org/downloads/)
@@ -115,10 +115,10 @@ Follow these steps to set up and run the project on your local machine.
     -   [Microsoft ODBC Driver 17 for SQL Server](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server).
 -   **Recommended Tooling**:
     -   For easier database management within VS Code, it is highly recommended to install the **MSSQL extension**. It allows you to connect to your database, run queries, and manage tables directly from your editor.
+<img width="1220" height="203" alt="Screenshot 2025-08-21 231149" src="https://github.com/user-attachments/assets/b2048cd6-faaf-4e67-89e1-254a55302c0a" />
 
-        
 
-### ### 6.2. Installation Steps
+### 6.2. Installation Steps
 
 1.  **Clone the Repository**:
     ```bash
@@ -137,7 +137,7 @@ Follow these steps to set up and run the project on your local machine.
     -   Then, execute the `db/setup.sql` script to create the table structures.(NOTE: For assignment purpose the data added is limited can add more data.)
     -   Finally, execute `db/check.sql` to populate the tables with sample data.
 
-### ### 6.3. **IMPORTANT: Customizing the Database Connection URI**
+### 6.3. **IMPORTANT: Customizing the Database Connection URI**
 
 The application needs to know how to connect to your specific database instance. This is configured via a connection URI string within the source code.
 
@@ -169,7 +169,7 @@ def get_database_connection():
 
 -   **To use SQL Server Authentication** (if not using a trusted Windows connection): You must provide a username and password.
     -   *Example*: `mssql+pyodbc://your_user:your_password@localhost\\SQLEXPRESS/rental_app?driver=...`
-For the time being use this connection URI else you can add your own connection uri and check the connection using `testing_connection.py` file.
+- For the time being use this connection URI else you can add your own connection uri and check the connection using `testing_connection.py` file.
 ### ### 6.4. Set Up API Key
 
 -   In the project root, create a file named `.env`.
@@ -178,7 +178,7 @@ For the time being use this connection URI else you can add your own connection 
     GEMINI_API_KEY="YOUR_API_KEY_HERE"
     ```
 
-### ### 6.5. Run the Application
+### 6.5. Run the Application
 
 ```bash
 streamlit run app.py
@@ -186,7 +186,7 @@ streamlit run app.py
 
 ***
 
-## ## 7. Challenges and Solutions
+## 7. Challenges and Solutions
 
 1.  **Challenge**: The agent was answering general knowledge questions, breaking its intended scope.
     -   **Solution**: Implemented  **no-tool-using** method so that llm don't use it's general knowledge to answer any question not related to the database. The custom setting explicitly forbids this behavior and forces the agent to decline off-topic questions.
@@ -197,7 +197,7 @@ streamlit run app.py
 3.  **Challenge**: Inconsistencies between LangChain versions led to an `AttributeError` when trying to access the database engine (`db.engine`).
     -   **Solution**: Investigated the `SQLDatabase` object structure and found that the engine was stored in a protected `_engine` attribute in the current version. The code was updated to use `db._engine`, resolving the issue.
 
-## ## 8. Future Improvements
+## 8. Future Improvements
 
 While the current system is robust, there are several avenues for future enhancement:
 
@@ -209,17 +209,17 @@ While the current system is robust, there are several avenues for future enhance
 
 ***
 
-## ## 9. Author
+## 9. Author
 
 This project was created and is maintained by:
 
 -   **[Dishant Bothra]**
-    -   GitHub: `[@_Horizon](https://github.com/DishantB0411)`
-    -   LinkedIn: `[Dishant Bothra](https://www.linkedin.com/in/dishantbothra/)`
+    -   GitHub: [@_Horizon](https://github.com/DishantB0411)
+    -   LinkedIn: [Dishant Bothra](https://www.linkedin.com/in/dishantbothra/)
 
 ***
 
-## ## 10. License
+## 10. License
 
 This project is licensed under the MIT License. You can find the full license text in the `LICENSE` file in the repository.
 
