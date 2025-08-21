@@ -1,4 +1,4 @@
-# CXO AI Database Assistant: A Deep Dive 💬🤖
+# Database Assistant: A Deep Dive 💬🤖
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.35%2B-orange.svg)](https://streamlit.io)
@@ -79,7 +79,7 @@ This function is the heart of the application's AI capabilities.
 ### ### 4.2. Streamlit UI and Chat Logic
 
 -   **Sidebar for Database Info**: The code explicitly gets the table names from the `db` object and iterates through them, using `db._inspector.get_columns(table)` to fetch and display the schema for each table in the sidebar.
--   ![sidebar](screenshots/Screenshot 2025-08-21 225059.jpg)
+-   ![sidebar](screenshots/Screenshot 2025-08-21 225059.png)
 -   **Chat Display & SQL Extraction**: When a user submits a prompt, the app invokes the agent. It then parses the `intermediate_steps` from the response to find the final `sql_db_query` action. This provides both the raw data and the exact SQL query, which is stored and displayed in the `st.expander("🔍 View SQL Query")` component.
 
 ***
