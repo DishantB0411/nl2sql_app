@@ -79,6 +79,7 @@ This function is the heart of the application's AI capabilities.
 ### ### 4.2. Streamlit UI and Chat Logic
 
 -   **Sidebar for Database Info**: The code explicitly gets the table names from the `db` object and iterates through them, using `db._inspector.get_columns(table)` to fetch and display the schema for each table in the sidebar.
+-   ![sidebar](screenshots/Screenshot 2025-08-21 225059.jpg)
 -   **Chat Display & SQL Extraction**: When a user submits a prompt, the app invokes the agent. It then parses the `intermediate_steps` from the response to find the final `sql_db_query` action. This provides both the raw data and the exact SQL query, which is stored and displayed in the `st.expander("🔍 View SQL Query")` component.
 
 ***
@@ -207,7 +208,7 @@ While the current system is robust, there are several avenues for future enhance
 
 This project was created and is maintained by:
 
--   **[Your Name]**
+-   **[Dishant Bothra]**
     -   GitHub: `[@_Horizon](https://github.com/DishantB0411)`
     -   LinkedIn: `[Dishant Bothra](https://www.linkedin.com/in/dishantbothra/)`
 
@@ -217,4 +218,4 @@ This project was created and is maintained by:
 
 This project is licensed under the MIT License. You can find the full license text in the `LICENSE` file in the repository.
 
-© 2025, [Your Name]. All Rights Reserved.
+© 2025, [Dishant Bothra]. All Rights Reserved.
