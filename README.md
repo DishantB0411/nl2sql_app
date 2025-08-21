@@ -6,7 +6,7 @@
 [![Google Gemini](https://img.shields.io/badge/Google-Gemini-purple.svg)](https://ai.google.dev/)
 
 ## ## 1. Project Abstract
-
+![UI](https://github.com/DishantB0411/nl2sql_app/blob/main/screenshots/Screenshot%202025-08-21%20225127.png)
 This repository, `NL2SQL_APP`, contains the source code for the **Database Assistant**, an advanced conversational AI application. Its primary objective is to bridge the gap between complex business data and non-technical stakeholders (such as C-level executives) by providing a natural language interface for database querying.
 
 The system leverages a Large Language Model (LLM), specifically Google's **Gemini**, integrated through the **LangChain** framework. It functions as a **Text-to-SQL agent**, interpreting user questions, dynamically generating SQL queries, executing them against a live MS SQL Server database, and returning answers in a clear, digestible format. The entire user experience is delivered through an interactive web application built with **Streamlit**.
@@ -79,7 +79,7 @@ This function is the heart of the application's AI capabilities.
 ### ### 4.2. Streamlit UI and Chat Logic
 
 -   **Sidebar for Database Info**: The code explicitly gets the table names from the `db` object and iterates through them, using `db._inspector.get_columns(table)` to fetch and display the schema for each table in the sidebar.
--   ![sidebar](https://github.com/DishantB0411/nl2sql_app/blob/main/screenshots/Screenshot%202025-08-21%20225035.png)
+-   ![sidebar](https://github.com/DishantB0411/nl2sql_app/blob/main/screenshots/Screenshot%202025-08-21%20225047.png)
 -   **Chat Display & SQL Extraction**: When a user submits a prompt, the app invokes the agent. It then parses the `intermediate_steps` from the response to find the final `sql_db_query` action. This provides both the raw data and the exact SQL query, which is stored and displayed in the `st.expander("🔍 View SQL Query")` component.
 
 ***
@@ -92,8 +92,13 @@ The `rental_app` database contains the core tables for the business. The schema 
 
 *(List your actual tables here. Example below)*
 
--   **`properties` Table**: Stores details about each rental property.
--   **`landlords` Table**: Stores information about property owners.
+-   **`users` 
+-   **`favorites`
+-   **`bookings`
+-   **`properties` 
+-   **`property_photos`
+-   **`reviews`
+-   **`payments`
 
 ***
 
@@ -185,7 +190,7 @@ streamlit run app.py
 
 1.  **Challenge**: The agent was answering general knowledge questions, breaking its intended scope.
     -   **Solution**: Implemented  **no-tool-using** method so that llm don't use it's general knowledge to answer any question not related to the database. The custom setting explicitly forbids this behavior and forces the agent to decline off-topic questions.
-
+![outofbox](https://github.com/DishantB0411/nl2sql_app/blob/main/screenshots/Screenshot%202025-08-21%20225343.png)
 2.  **Challenge**: The DataFrame displayed in Streamlit had integer indexes (0, 1, 2...) instead of the correct column names.
     -   **Solution**: After receiving the raw tuple data from the agent, a secondary step was added to re-execute the same query using SQLAlchemy's core engine (`db._engine`). This allowed access to the `keys()` method of the result proxy, which provides the column headers.
 
